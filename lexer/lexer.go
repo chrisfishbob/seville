@@ -22,14 +22,18 @@ func New(input string) *Lexer {
 }
 
 func (l *Lexer) readChar() {
+	var offset int
+
 	if l.readPosition >= len(l.input) {
 		l.ch = 0
+		offset = 1
 	} else {
 		r, width := utf8.DecodeRuneInString(l.input[l.readPosition:])
 		l.ch = r
-		l.position = l.readPosition
-		l.readPosition += width
+		offset = width
 	}
+	l.position = l.readPosition
+	l.readPosition += offset
 }
 
 func (l *Lexer) NextToken() token.Token {

@@ -28,6 +28,8 @@ func TestNextToken(t *testing.T) {
 	10 != 23;
 	🌹🎶 🇪🇸 
 	🍇 =🍇 2🍇
+	23 + 🍇 = 1
+	1 + 1 == 2
 	`
 
 	tests := []struct {
@@ -114,6 +116,16 @@ func TestNextToken(t *testing.T) {
 		{token.IDENT, "🍇"},
 		{token.INT, "2"},
 		{token.IDENT, "🍇"},
+		{token.INT, "23"},
+		{token.PLUS, "+"},
+		{token.IDENT, "🍇"},
+		{token.ASSIGN, "="},
+		{token.INT, "1"},
+		{token.INT, "1"},
+		{token.PLUS, "+"},
+		{token.INT, "1"},
+		{token.EQ, "=="},
+		{token.INT, "2"},
 		{token.EOF, ""},
 	}
 
