@@ -1,7 +1,7 @@
 package lexer
 
 import (
-	"venice/token"
+	"seville/token"
 )
 
 type Lexer struct {
