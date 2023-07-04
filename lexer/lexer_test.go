@@ -1,8 +1,8 @@
 package lexer
 
 import (
-	"testing"
 	"seville/token"
+	"testing"
 )
 
 func TestNextToken(t *testing.T) {
@@ -11,7 +11,7 @@ func TestNextToken(t *testing.T) {
 	let five = 5;
 	let ten = 10;
 	
-	let add = fn(x, y) {
+	let add = fn(🌮, y) {
 		x + y;
 	};
 	
@@ -24,9 +24,10 @@ func TestNextToken(t *testing.T) {
 	} else {
 		return false;
 	}
-
-	21 == 21;
+	21⚽ == 21;
 	10 != 23;
+	🌹🎶 🇪🇸 
+	🍇 =🍇 2🍇
 	`
 
 	tests := []struct {
@@ -48,7 +49,7 @@ func TestNextToken(t *testing.T) {
 		{token.ASSIGN, "="},
 		{token.FUNCTION, "fn"},
 		{token.LPAREN, "("},
-		{token.IDENT, "x"},
+		{token.IDENT, "🌮"},
 		{token.COMMA, ","},
 		{token.IDENT, "y"},
 		{token.RPAREN, ")"},
@@ -98,6 +99,7 @@ func TestNextToken(t *testing.T) {
 		{token.SEMICOLON, ";"},
 		{token.RBRACE, "}"},
 		{token.INT, "21"},
+		{token.IDENT, "⚽"},
 		{token.EQ, "=="},
 		{token.INT, "21"},
 		{token.SEMICOLON, ";"},
@@ -105,6 +107,13 @@ func TestNextToken(t *testing.T) {
 		{token.NOT_EQ, "!="},
 		{token.INT, "23"},
 		{token.SEMICOLON, ";"},
+		{token.IDENT, "🌹🎶"},
+		{token.IDENT, "🇪🇸"},
+		{token.IDENT, "🍇"},
+		{token.ASSIGN, "="},
+		{token.IDENT, "🍇"},
+		{token.INT, "2"},
+		{token.IDENT, "🍇"},
 		{token.EOF, ""},
 	}
 

@@ -1,14 +1,17 @@
 package lexer
 
 import (
+	"regexp"
 	"seville/token"
+	"unicode"
+	"unicode/utf8"
 )
 
 type Lexer struct {
 	input        string
 	position     int  // current position in input
 	readPosition int  // current reading position in input (after current char)
-	ch           byte // current char under examination
+	ch           rune // current char under examination
 
 }
 
@@ -22,10 +25,11 @@ func (l *Lexer) readChar() {
 	if l.readPosition >= len(l.input) {
 		l.ch = 0
 	} else {
-		l.ch = l.input[l.readPosition]
+		r, width := utf8.DecodeRuneInString(l.input[l.readPosition:])
+		l.ch = r
+		l.position = l.readPosition
+		l.readPosition += width
 	}
-	l.position = l.readPosition
-	l.readPosition += 1
 }
 
 func (l *Lexer) NextToken() token.Token {
@@ -84,7 +88,7 @@ func (l *Lexer) NextToken() token.Token {
 			tok.Literal = l.readIdentifier()
 			tok.Type = token.LookupIdent(tok.Literal)
 			return tok
-		} else if isDigit(l.ch) {
+		} else if unicode.IsDigit(l.ch) {
 			tok.Type = token.INT
 			tok.Literal = l.readNumber()
 			return tok
@@ -98,7 +102,7 @@ func (l *Lexer) NextToken() token.Token {
 }
 
 func (l *Lexer) skipWhitespace() {
-	for l.ch == ' ' || l.ch == '\t' || l.ch == '\n' || l.ch == '\r' {
+	for unicode.IsSpace(l.ch) {
 		l.readChar()
 	}
 }
@@ -113,28 +117,32 @@ func (l *Lexer) readIdentifier() string {
 
 func (l *Lexer) readNumber() string {
 	position := l.position
-	for isDigit(l.ch) {
+	for unicode.IsDigit(l.ch) {
 		l.readChar()
 	}
 	return l.input[position:l.position]
 }
 
-func (l *Lexer) peakChar() byte {
+func (l *Lexer) peakChar() rune {
 	if l.readPosition >= len(l.input) {
 		return 0
 	} else {
-		return l.input[l.readPosition]
+		r, _ := utf8.DecodeRuneInString(l.input[l.readPosition:])
+		return r
 	}
 }
 
-func isLetter(ch byte) bool {
-	return 'a' <= ch && ch <= 'z' || 'A' <= ch && ch <= 'Z' || ch == '_'
+func isLetter(ch rune) bool {
+	return unicode.IsLetter(ch) || ch == '_' || isEmoji(ch)
 }
 
-func isDigit(ch byte) bool {
-	return '0' <= ch && ch <= '9'
+func isEmoji(ch rune) bool {
+	emojisAndExtendedPictographicPattern := `
+	<a?:.+?:\d{18}>|[\x{1F300}-\x{1F9FF}\x{2600}-\x{26FF}\x{2700}-\x{27BF}\x{1F1E6}-\x{1F1FF}]`
+	emojiRegex := regexp.MustCompile(emojisAndExtendedPictographicPattern)
+	return emojiRegex.MatchString(string(ch))
 }
 
-func newToken(tokenType token.TokenType, ch byte) token.Token {
+func newToken(tokenType token.TokenType, ch rune) token.Token {
 	return token.Token{Type: tokenType, Literal: string(ch)}
 }
