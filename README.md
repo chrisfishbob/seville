@@ -13,4 +13,8 @@ A C-like compiled language in pure Go, no libraries, no parser generators, no no
 * Unicode / emoji support 🌹
 
 ### Parser
-* In progress!
+* In progress, here are the completed ones ...
+* Integer literals
+* Let statements (variable declaration)
+* Return statements
+* Prefix operators (ex. -5, !ok, ...)
