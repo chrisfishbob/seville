@@ -19,3 +19,6 @@ A C-like compiled language in pure Go, no libraries, no parser generators, no no
 :white_check_mark: Return statements  
 :white_check_mark: Prefix operators (ex. -5, !ok, ...)  
 :white_check_mark: Infix operators (5 > 4 == 3 < 4)  
+:white_check_mark: Grouped expressions (2 * (1 + 2))
+:white_check_mark: Conditionals (if ... else ...)
+:white_check_mark: Function literals (fn(...) {})
