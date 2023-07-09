@@ -5,17 +5,17 @@ A C-like compiled language in pure Go, no libraries, no parser generators, no no
 
 ## Progress Landmarks
 ### Lexer
-* Single-character operators
-* Integer literals
-* Identifiers
-* Keywords
-* Multi-character operators
-* Unicode / emoji support 🌹
+:white_check_mark: Single-character operators  
+:white_check_mark: Integer literals  
+:white_check_mark: Identifiers  
+:white_check_mark: Keywords  
+:white_check_mark: Multi-character operators  
+:white_check_mark: Unicode / emoji support 🌹  
 
 ### Parser
-* In progress, here are the completed ones ...
-* Integer literals
-* Let statements (variable declaration)
-* Return statements
-* Prefix operators (ex. -5, !ok, ...)
-* Infix operators (5 > 4 == 3 < 4)
+:white_check_mark: In progress, here are the completed ones ...  
+:white_check_mark: Integer literals  
+:white_check_mark: Let statements (variable declaration)  
+:white_check_mark: Return statements  
+:white_check_mark: Prefix operators (ex. -5, !ok, ...)  
+:white_check_mark: Infix operators (5 > 4 == 3 < 4)  
