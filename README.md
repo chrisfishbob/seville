@@ -18,3 +18,4 @@ A C-like compiled language in pure Go, no libraries, no parser generators, no no
 * Let statements (variable declaration)
 * Return statements
 * Prefix operators (ex. -5, !ok, ...)
+* Infix operators (5 > 4 == 3 < 4)
