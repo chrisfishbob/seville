@@ -23,3 +23,4 @@ In progress, here are the completed ones ...
 :white_check_mark: Grouped expressions (`2 * (1 + 2)`)  
 :white_check_mark: Conditionals (`if ... else ...`)  
 :white_check_mark: Function literals (`fn(...) {...}`)
+:white_check_mark: Call expressions (`foo()`)
