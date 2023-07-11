@@ -13,6 +13,6 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Printf("Hello %s! This is the Seville programming language!\n", user.Username)
+	fmt.Printf("🍇 Hello %s! This is the Seville programming language! 🍇\n", user.Username)
 	repl.Start(os.Stdin, os.Stdout)
 }
