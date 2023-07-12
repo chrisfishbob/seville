@@ -29,7 +29,8 @@ In progress, here are the completed ones ...
 Now evaluating ...  
 :white_check_mark: Integer literals  
 :white_check_mark: Boolean literals  
-:white_check_mark: Prefix expressions (`!false`)  
+:white_check_mark: Bang prefix expression (`!false`)   
+:white_check_mark: Minus prefix expression (`-5`)   
   
 ### Byte Code Compiler && Virtual Machine
 Coming soon!
