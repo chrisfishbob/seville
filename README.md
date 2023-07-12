@@ -24,3 +24,12 @@ In progress, here are the completed ones ...
 :white_check_mark: Conditionals (`if ... else ...`)  
 :white_check_mark: Function literals (`fn(...) {...}`)  
 :white_check_mark: Call expressions (`foo()`)
+  
+### Interpreter
+Now evaluating ...  
+:white_check_mark: Integer literals  
+:white_check_mark: Boolean literals  
+:white_check_mark: Prefix expressions (`!false`)  
+  
+### Byte Code Compiler && Virtual Machine
+Coming soon!
