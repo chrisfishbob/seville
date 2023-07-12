@@ -4,9 +4,9 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+	"seville/evaluator"
 	"seville/lexer"
 	"seville/parser"
-	"seville/evaluator"
 )
 
 const PROMPT = ">> "
