@@ -241,14 +241,14 @@ func (fl *FunctionLiteral) String() string {
 }
 
 type CallExpression struct {
-	Token token.Token // The '(' token
-	Function Expression // Identifier or FunctinLiteral
+	Token     token.Token // The '(' token
+	Function  Expression  // Identifier or FunctinLiteral
 	Arguments []Expression
 }
 
-func (ce *CallExpression) expressionNode() {}
+func (ce *CallExpression) expressionNode()      {}
 func (ce *CallExpression) TokenLiteral() string { return ce.Token.Literal }
-func (ce * CallExpression) String() string {
+func (ce *CallExpression) String() string {
 	var out bytes.Buffer
 
 	args := []string{}
