@@ -1,6 +1,7 @@
 package evaluator
 
 import (
+	"fmt"
 	"seville/lexer"
 	"seville/object"
 	"seville/parser"
@@ -24,6 +25,16 @@ func TestEvalIntegerExpression(t *testing.T) {
 		{"10", 10},
 		{"-5", -5},
 		{"-10", -10},
+		{"10 + 10 + 10 + 10 - 5", 35},
+		{"3 * 3 * 3 - 2", 25},
+		{"6 * 10 + 7", 67},
+		{"5 + 2 * 10", 25},
+		{"20 - 2 * 10", 0},
+		{"100 / 2 * 2 + 10", 110},
+		{"2 * (10 + 15)", 50},
+		{"3 * (3 * 3) + 10", 37},
+		{"(5 + 10 * 2 + 15 / 3) * 2 + -10", 50},
+
 	}
 
 	for _, tt := range tests {
@@ -93,4 +104,11 @@ func TestBangOperator(t *testing.T) {
 		evaluated := testEval(tt.input)
 		testBooleanObject(t, evaluated, tt.expected)
 	}
+}
+
+func AssertOne(n int) (int, error) {
+	if n == 1 {
+		return 1, nil
+	}
+	return 0, fmt.Errorf("no")
 }
