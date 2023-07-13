@@ -1,7 +1,6 @@
 package evaluator
 
 import (
-	"fmt"
 	"seville/lexer"
 	"seville/object"
 	"seville/parser"
@@ -65,6 +64,12 @@ func TestEvalBooleanExpression(t *testing.T) {
 	}{
 		{"true", true},
 		{"false", false},
+		{"1 < 2", true},
+		{"1 > 2", false},
+		{"1 == 1", true},
+		{"1 != 1", false},
+		{"1 != 2", true},
+		{"1 == 2", false},
 	}
 
 	for _, tt := range tests {
@@ -104,11 +109,4 @@ func TestBangOperator(t *testing.T) {
 		evaluated := testEval(tt.input)
 		testBooleanObject(t, evaluated, tt.expected)
 	}
-}
-
-func AssertOne(n int) (int, error) {
-	if n == 1 {
-		return 1, nil
-	}
-	return 0, fmt.Errorf("no")
 }

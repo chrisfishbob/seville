@@ -58,6 +58,14 @@ func evalPrefixExpression(operator string, right object.Object) object.Object {
 	}
 }
 
+func nativeBoolToBooleanObject(b bool) *object.Boolean {
+	if b {
+		return TRUE
+	} else {
+		return FALSE
+	}
+}
+
 func evalBangOperatorExpression(right object.Object) object.Object {
 	switch right {
 	case TRUE:
@@ -100,6 +108,14 @@ func evalIntegerInfixExpression(operator string, left, right object.Object) obje
 		return &object.Integer{Value: leftVal * rightVal}
 	case "/":
 		return &object.Integer{Value: leftVal / rightVal}
+	case "<":
+		return nativeBoolToBooleanObject(leftVal < rightVal) 
+	case ">":
+		return nativeBoolToBooleanObject(leftVal > rightVal) 
+	case "==":
+		return nativeBoolToBooleanObject(leftVal == rightVal) 
+	case "!=":
+		return nativeBoolToBooleanObject(leftVal != rightVal) 
 	default:
 		return NULL
 	}
