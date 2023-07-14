@@ -32,7 +32,8 @@ Now evaluating ...
 :white_check_mark: Boolean literals  
 :white_check_mark: Bang prefix expression (`!false`)   
 :white_check_mark: Minus prefix expression (`-5`)   
-:white_check_mark: Infix expressions (`(5 + 5) * 2 == 15 + 5`)  
+:white_check_mark: Infix expressions (`(5 + 5) * 2 == 15 + 5`)   
+:white_check_mark: If else expression (`if (...) {...} else {...}`)  
   
 ### Byte Code Compiler && Virtual Machine
 Coming soon!
