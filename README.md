@@ -61,3 +61,19 @@ Now evaluating ...
   
 ### Byte Code Compiler && Virtual Machine
 Coming soon!
+
+
+### Credits
+* *Programming Languages: Application and Interpretation* by Shriram Krishnamurthi  
+* *Crafting Interpreters* by Rober Nystrom  
+* *Writing an Interpreter* in Go by Thorsten Ball    
+* *(How to Write a (Lisp) Interpreter (in Python))* by Peter Norvig  
+
+Thanks all!
+
+
+### Related Projects
+Seviile is not my first language, in fact, it's my third!
+Here are the others:  
+* JYSS- A lisp with a static type-checker, written in Typed Racket. (Closed-source for academic reasons.)  
+* [Spark](https://github.com/chrisfishbob/Spark) (JYSS-esque lisp written in Python 3.10)  
