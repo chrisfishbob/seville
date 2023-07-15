@@ -33,6 +33,7 @@ func TestEvalIntegerExpression(t *testing.T) {
 		{"2 * (10 + 15)", 50},
 		{"3 * (3 * 3) + 10", 37},
 		{"(5 + 10 * 2 + 15 / 3) * 2 + -10", 50},
+
 	}
 
 	for _, tt := range tests {
@@ -122,9 +123,9 @@ func TestBangOperator(t *testing.T) {
 
 func TestIfElseExpressions(t *testing.T) {
 	tests := []struct {
-		input    string
+		input string
 		expected interface{}
-	}{
+	} {
 		{"if (true) { 10 }", 10},
 		{"if (false) { 10 }", nil},
 		{"if (1) { 10 }", 10},
@@ -151,4 +152,29 @@ func testNullObject(t *testing.T, obj object.Object) bool {
 		return false
 	}
 	return true
+}
+
+func TestReturnStatement(t *testing.T) {
+	tests := []struct {
+		input string
+		expected int64
+	} {
+		{`
+		if (10 > 1) {
+			if (10 > 1) {
+				return 10;
+			}
+			\return 1;
+		}
+		`, 10},
+		{"return 10;", 10},
+		{"return 10; 9", 10},
+		{"return 2 * 5; 9", 10},
+		{"9; return 2 * 5; 9", 10},
+	}
+
+	for _, tt := range tests {
+		evaluated := testEval(tt.input)
+		testIntegerObject(t, evaluated, tt.expected)
+	}
 }

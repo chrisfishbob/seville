@@ -28,12 +28,13 @@ In progress, here are the completed ones ...
   
 ### Interpreter
 Now evaluating ...  
-:white_check_mark: Integer literals  
-:white_check_mark: Boolean literals  
-:white_check_mark: Bang prefix expression (`!false`)   
+:white_check_mark: Integer literals (`1, 55`)  
+:white_check_mark: Boolean literals (`true, false`)  
+:white_check_mark: Bang prefix expression (`!false`)    
 :white_check_mark: Minus prefix expression (`-5`)   
 :white_check_mark: Infix expressions (`(5 + 5) * 2 == 15 + 5`)   
 :white_check_mark: If else expression (`if (...) {...} else {...}`)  
+:white_check_mark: Return statements (`return 17;`)   
   
 ### Byte Code Compiler && Virtual Machine
 Coming soon!
