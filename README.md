@@ -35,6 +35,7 @@ Now evaluating ...
 :white_check_mark: Infix expressions (`(5 + 5) * 2 == 15 + 5`)   
 :white_check_mark: If else expression (`if (...) {...} else {...}`)  
 :white_check_mark: Return statements (`return 17;`)   
+:white_check_mark: Environments (`let x = 2;`)  
   
 ### Byte Code Compiler && Virtual Machine
 Coming soon!
