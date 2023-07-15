@@ -4,6 +4,23 @@
 
 A C-family compiled language in pure Go, no libraries, no parser generators, no nothing!
 
+
+## Quick Tour
+Here is a toy program that capsulates most of Seville's currently supported features:  
+```
+let x = 2
+let y = 10
+let min = fn(x, y) {
+    if (x < y) {
+        x
+    } else {
+        y
+    }
+}
+min(x + 20, y * 2)    # prints 20
+```
+
+
 ## Progress Landmarks
 ### Lexer
 :white_check_mark: Single-character operators  
