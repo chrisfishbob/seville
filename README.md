@@ -37,6 +37,8 @@ Now evaluating ...
 :white_check_mark: Return statements (`return 17;`)   
 :white_check_mark: Environments (`let x = 2;`)  
 :white_check_mark: First-class functions (`let add_one = fn(n) {n + 1}`)  
+:white_check_mark: Funcion calls (`fn(x, y) { return x + y }`)  
+:white_check_mark: Recursion (`0, 0, 1, 1, 2, 3, 5, 8, ...`)  
   
 ### Byte Code Compiler && Virtual Machine
 Coming soon!
