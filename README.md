@@ -10,6 +10,7 @@ Here is a toy program that capsulates most of Seville's currently supported feat
 ```
 let x = 2
 let y = 10
+let newAdder = fn(x) { fn (y) {x + y}}
 let min = fn(x, y) {
     if (x < y) {
         x
@@ -17,7 +18,8 @@ let min = fn(x, y) {
         y
     }
 }
-min(x + 20, y * 2)    # prints 20
+let addTwenty = newAdder(20)
+min(addTwenty(x), y * 2)    # prints 20
 ```
 
 
