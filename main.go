@@ -13,6 +13,10 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Printf("🍇 Hello %s! This is the Seville programming language! 🍇\n", user.Username)
-	repl.Start(os.Stdin, os.Stdout)
+	if len(os.Args) == 1 {
+		fmt.Printf("🍇 Hello %s! This is the Seville programming language! 🍇\n", user.Username)
+		repl.Start(os.Stdin, os.Stdout)
+	} else {
+		fmt.Fprintln(os.Stderr, "ERROR: Seville currently only supports REPL")
+	} 
 }
