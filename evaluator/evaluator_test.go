@@ -308,3 +308,22 @@ func TestClosures(t *testing.T) {
 
 	testIntegerObject(t, testEval(input), 4)
 }
+
+func TestRecursion(t *testing.T) {
+	input := `
+	let fibonacci = fn(n) {
+		if (n == 0) {
+			0
+		} else {
+			if (n == 1) {
+				1
+			} else {
+				fibonacci(n - 1) + fibonacci(n - 2)
+			}
+		}
+	}
+	
+	fibonacci(10)`
+
+	testIntegerObject(t, testEval(input), 55)
+}
