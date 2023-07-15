@@ -18,5 +18,5 @@ func main() {
 		repl.Start(os.Stdin, os.Stdout)
 	} else {
 		fmt.Fprintln(os.Stderr, "ERROR: Seville currently only supports REPL")
-	} 
+	}
 }
