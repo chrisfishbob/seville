@@ -36,6 +36,7 @@ Now evaluating ...
 :white_check_mark: If else expression (`if (...) {...} else {...}`)  
 :white_check_mark: Return statements (`return 17;`)   
 :white_check_mark: Environments (`let x = 2;`)  
+:white_check_mark: First-class functions (`let add_one = fn(n) {n + 1}`)  
   
 ### Byte Code Compiler && Virtual Machine
 Coming soon!
