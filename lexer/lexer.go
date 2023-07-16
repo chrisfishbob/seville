@@ -1,11 +1,11 @@
 package lexer
 
 import (
+	"fmt"
 	"regexp"
 	"seville/token"
 	"unicode"
 	"unicode/utf8"
-	"fmt"
 )
 
 type Lexer struct {
@@ -97,7 +97,7 @@ func (l *Lexer) NextToken() token.Token {
 		if err != nil {
 			tok = newToken(token.ILLEGAL, l.ch)
 		} else {
-		    tok.Literal = strLiteral
+			tok.Literal = strLiteral
 		}
 	case 0:
 		tok.Literal = ""
@@ -173,7 +173,7 @@ func (l *Lexer) readString() (string, error) {
 		if l.ch == '"' {
 			break
 		} else if l.ch == 0 {
-            return "", fmt.Errorf("encountered EOF while reading string") 
+			return "", fmt.Errorf("encountered EOF while reading string")
 		}
 	}
 	return l.input[position:l.position], nil

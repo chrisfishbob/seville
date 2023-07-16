@@ -191,11 +191,11 @@ func (ie *IfExpression) String() string {
 	out.WriteString(" {\n")
 	out.WriteString("        ")
 	out.WriteString(ie.Consequence.String())
-    out.WriteString("\n    }\n")
+	out.WriteString("\n    }\n")
 
-    for _, elif := range ie.Alternatives {
-        out.WriteString(elif.String())
-    }
+	for _, elif := range ie.Alternatives {
+		out.WriteString(elif.String())
+	}
 
 	if ie.Alternative != nil {
 		out.WriteString("    else {\n        ")
@@ -221,7 +221,7 @@ func (ee *ElifExpression) String() string {
 	out.WriteString(ee.Condition.String())
 	out.WriteString(" {\n        ")
 	out.WriteString(ee.Consequence.String())
-    out.WriteString("\n    }\n")
+	out.WriteString("\n    }\n")
 
 	return out.String()
 }
@@ -291,3 +291,12 @@ func (ce *CallExpression) String() string {
 
 	return out.String()
 }
+
+type StringLiteral struct {
+	Token token.Token
+	Value string
+}
+
+func (sl *StringLiteral) expressionNode()      {}
+func (sl *StringLiteral) TokenLiteral() string { return sl.Token.Literal }
+func (sl *StringLiteral) String() string       { return sl.Token.Literal }
