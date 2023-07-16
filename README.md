@@ -10,6 +10,7 @@ Here is a toy program that capsulates most of Seville's currently supported feat
 ```
 let 🍇 = 0
 let y = 23
+let name = "Seville"
 let newAdder = fn(x) { fn (y) {x + y}}
 let addTen = newAdder(10)
 let fib = fn(n) {
@@ -27,6 +28,7 @@ fib(addTen(🍇))     # Outputs 55
 ### Lexer
 :white_check_mark: Single-character operators  
 :white_check_mark: Integer literals  
+:white_check_mark: Stringf literals  
 :white_check_mark: Identifiers  
 :white_check_mark: Keywords  
 :white_check_mark: Multi-character operators  
@@ -44,6 +46,7 @@ In progress, here are the completed ones ...
 :white_check_mark: Conditionals (`if ... else ...`)  
 :white_check_mark: Function literals (`fn(...) {...}`)  
 :white_check_mark: Call expressions (`foo()`)
+:white_check_mark: Strigns (`"Hello, World!"`)
   
 ### Interpreter
 Now evaluating ...  
@@ -58,6 +61,7 @@ Now evaluating ...
 :white_check_mark: First-class functions (`let add_one = fn(n) {n + 1}`)  
 :white_check_mark: Funcion calls (`fn(x, y) { return x + y }`)  
 :white_check_mark: Recursion (`0, 0, 1, 1, 2, 3, 5, 8, ...`)  
+:white_check_mark: Strings (`"Hello, World!"`)
   
 ### Byte Code Compiler && Virtual Machine
 Coming soon!
