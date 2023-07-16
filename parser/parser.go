@@ -252,6 +252,13 @@ func (p *Parser) parseIfExpression() ast.Expression {
 
 	expression.Consequence = p.parseBlockStatement()
 
+	for p.peekTokenIs(token.ELIF) {
+		p.nextToken()
+		alternative := p.parseElifExpression()
+		expression.Alternatives = append(expression.Alternatives, alternative)
+
+	}
+
 	if p.peekTokenIs(token.ELSE) {
 		p.nextToken()
 
@@ -263,6 +270,28 @@ func (p *Parser) parseIfExpression() ast.Expression {
 	}
 
 	return expression
+}
+
+func (p *Parser) parseElifExpression() *ast.ElifExpression {
+	elif := &ast.ElifExpression{Token: p.curToken}
+	if !p.expectPeek(token.LPAREN) {
+		return nil
+	}
+
+	p.nextToken()
+	elif.Condition = p.parseExpression(LOWEST)
+
+	if !p.expectPeek(token.RPAREN) {
+		return nil
+	}
+
+	if !p.expectPeek(token.LBRACE) {
+		return nil
+	}
+
+	elif.Consequence = p.parseBlockStatement()
+
+	return elif
 }
 
 func (p *Parser) parseBlockStatement() *ast.BlockStatement {
