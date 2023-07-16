@@ -10,7 +10,7 @@ Here is a toy program that capsulates most of Seville's currently supported feat
 ```
 let 🍇 = 0
 let y = 23
-let name = "Seville"
+let name = "Sev" + "ille"
 let newAdder = fn(x) { fn (y) {x + y}}
 let addTen = newAdder(10)
 let fib = fn(n) {
@@ -46,7 +46,8 @@ In progress, here are the completed ones ...
 :white_check_mark: Conditionals (`if ... else ...`)  
 :white_check_mark: Function literals (`fn(...) {...}`)  
 :white_check_mark: Call expressions (`foo()`)
-:white_check_mark: Strigns (`"Hello, World!"`)
+:white_check_mark: Strigns (`"Hello, World!"`)  
+:white_check_mark: String concatendation (`"Hello" + " " + "World!"`)  
   
 ### Interpreter
 Now evaluating ...  
