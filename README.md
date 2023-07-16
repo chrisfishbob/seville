@@ -32,11 +32,13 @@ fib(addTen(🍇) - len(name) + 7)       # Outputs 55
 ### Lexer
 :white_check_mark: Single-character operators  
 :white_check_mark: Integer literals  
-:white_check_mark: Stringf literals  
+:white_check_mark: String literals  
 :white_check_mark: Identifiers  
 :white_check_mark: Keywords  
 :white_check_mark: Multi-character operators  
 :white_check_mark: Unicode / emoji support 🌹  
+:white_check_mark: Array literals  
+:white_check_mark: Array indices
 
 ### Parser
 In progress, here are the completed ones ...  
@@ -52,6 +54,8 @@ In progress, here are the completed ones ...
 :white_check_mark: Call expressions (`foo()`)
 :white_check_mark: Strigns (`"Hello, World!"`)  
 :white_check_mark: String concatendation (`"Hello" + " " + "World!"`)  
+:white_check_mark: Array literals (`[1, "hello" + "world", fn(x) {x * 2}]`)  
+:white_check_mark: Array indices (`arr[1 * 2]`)  
   
 ### Interpreter
 Now evaluating ...  
