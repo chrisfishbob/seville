@@ -177,6 +177,7 @@ type IfExpression struct {
 	Token       token.Token // The if token
 	Condition   Expression
 	Consequence *BlockStatement
+	Alternatives []*ElifExpression
 	Alternative *BlockStatement
 }
 
@@ -197,6 +198,15 @@ func (ie *IfExpression) String() string {
 
 	return out.String()
 }
+
+type ElifExpression struct {
+	Token token.Token // The elif token
+	Condition Expression
+	Consequence *BlockStatement
+}
+func (ee *ElifExpression) expressionNode() {}
+func (ee *ElifExpression) TokenLiteral() string { return ee.Token.Literal }
+func (ee *ElifExpression) String() string { return "TODO" }
 
 type BlockStatement struct {
 	Token      token.Token // the { token
