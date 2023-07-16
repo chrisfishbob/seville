@@ -70,6 +70,10 @@ func TestEvalBooleanExpression(t *testing.T) {
 		{"1 != 1", false},
 		{"1 != 2", true},
 		{"1 == 2", false},
+		{"1 <= 2", true},
+		{"1 >= 2", false},
+		{"2 >= 2", true},
+		{"2 <= 2", true},
 		{"true == true", true},
 		{"false == false", true},
 		{"true == false", false},
@@ -209,6 +213,10 @@ func TestErrorHandling(t *testing.T) {
 		{
 			"if (10 > 1) { true + false; }",
 			"unknown operator: BOOLEAN + BOOLEAN",
+		},
+		{
+			"5 >= true",
+			"type mismatch: INTEGER >= BOOLEAN",
 		},
 		{
 			`if (10 > 1) {
