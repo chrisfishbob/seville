@@ -318,7 +318,21 @@ func TestClosures(t *testing.T) {
 }
 
 func TestRecursion(t *testing.T) {
-	input := `
+	tests := []struct {
+		input    string
+		expected int64
+	}{
+		{`
+	let fibonacci = fn(n) {
+		if (n <= 1) {
+			n
+		} else {
+			fibonacci(n - 1) + fibonacci(n - 2)
+		}
+	}
+	
+	fibonacci(10)`, 55},
+		{`
 	let fibonacci = fn(n) {
 		if (n == 0) {
 			0
@@ -331,7 +345,10 @@ func TestRecursion(t *testing.T) {
 		}
 	}
 	
-	fibonacci(10)`
+	fibonacci(10)`, 55},
+	}
 
-	testIntegerObject(t, testEval(input), 55)
+	for _, tt := range tests {
+		testIntegerObject(t, testEval(tt.input), tt.expected)
+	}
 }
