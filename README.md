@@ -10,7 +10,11 @@ Here is a toy program that capsulates most of Seville's currently supported feat
 ```
 let 🍇 = 0
 let y = 23
-let newAdder = fn(x) { fn (y) {x + y}}
+let newAdder = fn(x) { 
+    fn (y) {
+        x + y
+    }
+}
 let addTen = newAdder(10)
 let fib = fn(n) {
     if (n <= 1) {
@@ -19,10 +23,8 @@ let fib = fn(n) {
     fib(n - 1) + fib(n - 2)
 }
 
-fib(addTen(🍇))       # Outputs 55
-
 let name = "Sev" + "ille"
-name == "Seville"    # Outputs true
+fib(addTen(🍇) - len(name) + 7)       # Outputs 55
 ```
 
 
