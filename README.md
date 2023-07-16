@@ -11,15 +11,16 @@ Here is a toy program that capsulates most of Seville's currently supported feat
 let x = 2
 let y = 10
 let newAdder = fn(x) { fn (y) {x + y}}
-let min = fn(x, y) {
-    if (x < y) {
-        x
+let addTen = newAdder(10)
+let fib = fn(n) {
+    if (n <= 1) {
+        return n
     } else {
-        y
+        return fib(n - 1) + fib(n - 2)
     }
+
+fib(addTen(0))     # Outputs 55
 }
-let addTwenty = newAdder(20)
-min(addTwenty(x), y * 2)    # prints 20
 ```
 
 
