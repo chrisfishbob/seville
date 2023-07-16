@@ -367,6 +367,8 @@ func TestParsingInfixExpressions(t *testing.T) {
 		{"5 < 5;", 5, "<", 5},
 		{"5 == 5;", 5, "==", 5},
 		{"5 != 5;", 5, "!=", 5},
+		{"5 >= 5;", 5, ">=", 5},
+		{"5 <= 5;", 5, "<=", 5},
 		{"true == true", true, "==", true},
 		{"true != false", true, "!=", false},
 		{"false == true", false, "==", true},
@@ -505,6 +507,10 @@ func TestOperatorPrecedenceParsing(t *testing.T) {
 		{
 			"add(a + b + c * d / f + g)",
 			"add((((a + b) + ((c * d) / f)) + g))",
+		},
+		{
+			"5 <= 1 + 2",
+			"(5 <= (1 + 2))",
 		},
 	}
 
