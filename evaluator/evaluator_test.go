@@ -334,6 +334,15 @@ func TestRecursion(t *testing.T) {
 	fibonacci(10)`, 55},
 		{`
 	let fibonacci = fn(n) {
+		if (n <= 1) {
+			return n
+		}
+		fibonacci(n - 1) + fibonacci(n - 2)
+	}
+	
+	fibonacci(10)`, 55},
+		{`
+	let fibonacci = fn(n) {
 		if (n == 0) {
 			0
 		} else {
