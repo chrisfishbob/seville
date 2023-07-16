@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"seville/ast"
 	"seville/object"
+	"unicode/utf8"
 )
 
 var (
@@ -21,7 +22,7 @@ var builtins = map[string]*object.Builtin {
 
 			switch arg := args[0].(type) {
 			case *object.String:
-				return &object.Integer{Value: int64(len(arg.Value))}
+				return &object.Integer{Value: int64(utf8.RuneCountInString(arg.Value))}
 			default:
 				return newError("argument to `len` not supported, got %s", args[0].Type())
 			}
