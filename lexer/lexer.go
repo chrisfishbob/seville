@@ -43,33 +43,33 @@ func (l *Lexer) NextToken() token.Token {
 
 	switch l.ch {
 	case '=':
-		if l.peakChar() == '=' {
+		if l.peekChar() == '=' {
 			l.readChar()
 			tok = token.Token{Type: token.EQ, Literal: "=="}
 		} else {
 			tok = newToken(token.ASSIGN, l.ch)
 		}
 	case '!':
-		if l.peakChar() == '=' {
+		if l.peekChar() == '=' {
 			l.readChar()
 			tok = token.Token{Type: token.NOT_EQ, Literal: "!="}
 		} else {
 			tok = newToken(token.BANG, l.ch)
 		}
 	case '<':
-		if l.peakChar() == '=' {
+		if l.peekChar() == '=' {
 			l.readChar()
 			tok = token.Token{Type: token.LT_OR_EQ, Literal: "<="}
 		} else {
 			tok = newToken(token.LT, l.ch)
 		}
 	case '>':
-		if l.peakChar() == '=' {
+		if l.peekChar() == '=' {
 			l.readChar()
 			tok = token.Token{Type: token.GT_OR_EQ, Literal: ">="}
 		} else {
 			tok = newToken(token.GT, l.ch)
-		} 
+		}
 	case ';':
 		tok = newToken(token.SEMICOLON, l.ch)
 	case '(':
@@ -133,7 +133,7 @@ func (l *Lexer) readNumber() string {
 	return l.input[position:l.position]
 }
 
-func (l *Lexer) peakChar() rune {
+func (l *Lexer) peekChar() rune {
 	if l.readPosition >= len(l.input) {
 		return 0
 	} else {
