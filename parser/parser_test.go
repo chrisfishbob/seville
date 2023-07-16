@@ -635,8 +635,9 @@ func TestIfElseExpression(t *testing.T) {
 	}
 }
 
+// TODO: Make this less scrappy
 func TestIfElifElseExpression(t *testing.T) {
-	input := `if (x < y) { x } elif (y > x) {2} else { y }`
+	input := `if (x < y) { x } elif (y > x) {2} elif (y == x) {3} else { y }`
 
 	l := lexer.New(input)
 	p := New(l)
@@ -679,19 +680,32 @@ func TestIfElifElseExpression(t *testing.T) {
 		return
 	}
 
-	// Tests for the elif
-	if len(exp.Alternatives) != 1 {
-		t.Fatalf("expected 1 elif expression. got=%d\n", len(exp.Alternatives))
+	// Tests for the two elifs
+	if len(exp.Alternatives) != 2 {
+		t.Fatalf("expected 2 elif expression. got=%d\n", len(exp.Alternatives))
 	}
+
 	if !testInfixExpression(t, exp.Alternatives[0].Condition, "y", ">", "x") {
 		return
 	}
-
-	elifConsequence, ok := exp.Alternatives[0].Consequence.Statements[0].(*ast.ExpressionStatement)
+	firstElifConsequence, ok := exp.Alternatives[0].Consequence.Statements[0].(*ast.ExpressionStatement)
 	if !ok {
-		t.Fatalf("todo")
+		t.Fatalf("Statements[0] is not ast.ExpressionStatement. got=%T",
+			exp.Consequence.Statements[0])
 	}
-	if !testIntegerLiteral(t, elifConsequence.Expression, 2) {
+	if !testIntegerLiteral(t, firstElifConsequence.Expression, 2) {
+		return
+	}
+
+	if !testInfixExpression(t, exp.Alternatives[1].Condition, "y", "==", "x") {
+		return
+	}
+	secondElifConsequence, ok := exp.Alternatives[1].Consequence.Statements[0].(*ast.ExpressionStatement)
+	if !ok {
+		t.Fatalf("Statements[1] is not ast.ExpressionStatement. got=%T",
+			exp.Consequence.Statements[0])
+	}
+	if !testIntegerLiteral(t, secondElifConsequence.Expression, 3) {
 		return
 	}
 

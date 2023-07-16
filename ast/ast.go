@@ -174,11 +174,11 @@ func (b *Boolean) TokenLiteral() string { return b.Token.Literal }
 func (b *Boolean) String() string       { return b.Token.Literal }
 
 type IfExpression struct {
-	Token       token.Token // The if token
-	Condition   Expression
-	Consequence *BlockStatement
+	Token        token.Token // The if token
+	Condition    Expression
+	Consequence  *BlockStatement
 	Alternatives []*ElifExpression
-	Alternative *BlockStatement
+	Alternative  *BlockStatement
 }
 
 func (ie *IfExpression) expressionNode()      {}
@@ -200,13 +200,23 @@ func (ie *IfExpression) String() string {
 }
 
 type ElifExpression struct {
-	Token token.Token // The elif token
-	Condition Expression
+	Token       token.Token // The elif token
+	Condition   Expression
 	Consequence *BlockStatement
 }
-func (ee *ElifExpression) expressionNode() {}
+
+func (ee *ElifExpression) expressionNode()      {}
 func (ee *ElifExpression) TokenLiteral() string { return ee.Token.Literal }
-func (ee *ElifExpression) String() string { return "TODO" }
+func (ee *ElifExpression) String() string {
+	var out bytes.Buffer
+
+	out.WriteString("elif (")
+	out.WriteString(ee.Condition.String())
+	out.WriteString(")")
+	out.WriteString(ee.Condition.String())
+
+	return out.String()
+}
 
 type BlockStatement struct {
 	Token      token.Token // the { token

@@ -252,7 +252,7 @@ func (p *Parser) parseIfExpression() ast.Expression {
 
 	expression.Consequence = p.parseBlockStatement()
 
-	if p.peekTokenIs(token.ELIF) {
+	for p.peekTokenIs(token.ELIF) {
 		p.nextToken()
 		alternative := p.parseElifExpression()
 		expression.Alternatives = append(expression.Alternatives, alternative)
@@ -291,7 +291,7 @@ func (p *Parser) parseElifExpression() *ast.ElifExpression {
 
 	elif.Consequence = p.parseBlockStatement()
 
-    return elif
+	return elif
 }
 
 func (p *Parser) parseBlockStatement() *ast.BlockStatement {
