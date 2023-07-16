@@ -9,18 +9,17 @@ A C-family compiled language in pure Go, no libraries, no parser generators, no 
 Here is a toy program that capsulates most of Seville's currently supported features:  
 ```
 let 🍇 = 0
-let y = 10
+let y = 23
 let newAdder = fn(x) { fn (y) {x + y}}
 let addTen = newAdder(10)
 let fib = fn(n) {
     if (n <= 1) {
         return n
-    } else {
-        return fib(n - 1) + fib(n - 2)
-    }
+    } 
+    fib(n - 1) + fib(n - 2)
+}
 
 fib(addTen(🍇))     # Outputs 55
-}
 ```
 
 
