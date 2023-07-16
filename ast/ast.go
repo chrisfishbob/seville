@@ -186,14 +186,21 @@ func (ie *IfExpression) TokenLiteral() string { return ie.Token.Literal }
 func (ie *IfExpression) String() string {
 	var out bytes.Buffer
 
-	out.WriteString("if")
+	out.WriteString("if ")
 	out.WriteString(ie.Condition.String())
-	out.WriteString(" ")
+	out.WriteString(" {\n")
+	out.WriteString("        ")
 	out.WriteString(ie.Consequence.String())
+    out.WriteString("\n    }\n")
+
+    for _, elif := range ie.Alternatives {
+        out.WriteString(elif.String())
+    }
 
 	if ie.Alternative != nil {
-		out.WriteString("else ")
+		out.WriteString("    else {\n        ")
 		out.WriteString(ie.Alternative.String())
+		out.WriteString("\n    }")
 	}
 
 	return out.String()
@@ -210,10 +217,11 @@ func (ee *ElifExpression) TokenLiteral() string { return ee.Token.Literal }
 func (ee *ElifExpression) String() string {
 	var out bytes.Buffer
 
-	out.WriteString("elif (")
+	out.WriteString("    elif ")
 	out.WriteString(ee.Condition.String())
-	out.WriteString(")")
-	out.WriteString(ee.Condition.String())
+	out.WriteString(" {\n        ")
+	out.WriteString(ee.Consequence.String())
+    out.WriteString("\n    }\n")
 
 	return out.String()
 }
