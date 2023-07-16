@@ -5,6 +5,7 @@ import (
 	"seville/token"
 	"unicode"
 	"unicode/utf8"
+	"fmt"
 )
 
 type Lexer struct {
@@ -92,7 +93,12 @@ func (l *Lexer) NextToken() token.Token {
 		tok = newToken(token.RBRACE, l.ch)
 	case '"':
 		tok.Type = token.STRING
-		tok.Literal = l.readString()
+		strLiteral, err := l.readString()
+		if err != nil {
+			tok = newToken(token.ILLEGAL, l.ch)
+		} else {
+		    tok.Literal = strLiteral
+		}
 	case 0:
 		tok.Literal = ""
 		tok.Type = token.EOF
@@ -160,13 +166,15 @@ func newToken(tokenType token.TokenType, ch rune) token.Token {
 	return token.Token{Type: tokenType, Literal: string(ch)}
 }
 
-func (l *Lexer) readString() string {
+func (l *Lexer) readString() (string, error) {
 	position := l.position + 1
 	for {
 		l.readChar()
-		if l.ch == '"' || l.ch == 0 {
+		if l.ch == '"' {
 			break
+		} else if l.ch == 0 {
+            return "", fmt.Errorf("encountered EOF while reading string") 
 		}
 	}
-	return l.input[position:l.position]
+	return l.input[position:l.position], nil
 }
