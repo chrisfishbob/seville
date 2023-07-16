@@ -44,37 +44,29 @@ func (l *Lexer) NextToken() token.Token {
 	switch l.ch {
 	case '=':
 		if l.peakChar() == '=' {
-			ch := l.ch
 			l.readChar()
-			literal := string(ch) + string(l.ch)
-			tok = token.Token{Type: token.EQ, Literal: literal}
+			tok = token.Token{Type: token.EQ, Literal: "=="}
 		} else {
 			tok = newToken(token.ASSIGN, l.ch)
 		}
 	case '!':
 		if l.peakChar() == '=' {
-			ch := l.ch
 			l.readChar()
-			literal := string(ch) + string(l.ch)
-			tok = token.Token{Type: token.NOT_EQ, Literal: literal}
+			tok = token.Token{Type: token.NOT_EQ, Literal: "!="}
 		} else {
 			tok = newToken(token.BANG, l.ch)
 		}
 	case '<':
 		if l.peakChar() == '=' {
-			ch := l.ch
 			l.readChar()
-			literal := string(ch) + string(l.ch)
-			tok = token.Token{Type: token.LT_OR_EQ, Literal: literal}
+			tok = token.Token{Type: token.LT_OR_EQ, Literal: "<="}
 		} else {
 			tok = newToken(token.LT, l.ch)
 		}
 	case '>':
 		if l.peakChar() == '=' {
-			ch := l.ch
 			l.readChar()
-			literal := string(ch) + string(l.ch)
-			tok = token.Token{Type: token.GT_OR_EQ, Literal: literal}
+			tok = token.Token{Type: token.GT_OR_EQ, Literal: ">="}
 		} else {
 			tok = newToken(token.GT, l.ch)
 		} 
