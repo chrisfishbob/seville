@@ -364,12 +364,19 @@ func evalIndexExpression(left, index object.Object) object.Object {
 
 func evalArrayIndexExpression(array, index object.Object) object.Object {
 	arrayObject := array.(*object.Array)
-	idx := index.(*object.Integer).Value
-	max := int64(len(arrayObject.Elements) - 1)
+	rawIdx := index.(*object.Integer).Value
+	maxIdx := int64(len(arrayObject.Elements) - 1)
 
-	if idx < 0 || idx > max {
-		return newError("array index out of bounds: given index %d, array length is: %d", idx, max) 
+	var adjIdx int64
+	if rawIdx < 0 {
+		adjIdx = int64(len(arrayObject.Elements) + int(rawIdx))
+	} else {
+		adjIdx = rawIdx
 	}
 
-	return arrayObject.Elements[idx]
+	if adjIdx > maxIdx || adjIdx < 0 {
+		return newError("array index out of bounds: given index %d, array length is: %d", rawIdx, maxIdx + 1) 
+	}
+
+	return arrayObject.Elements[adjIdx]
 }

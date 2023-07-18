@@ -467,6 +467,10 @@ func TestArrayIndexExpressions(t *testing.T) {
 		expected interface{}
 	}{
 		{
+			"[1, 2, 3][-1]",
+			3,
+		},
+		{
 			"[1, 2, 3][0]",
 			1,
 		},
@@ -487,6 +491,18 @@ func TestArrayIndexExpressions(t *testing.T) {
 			3,
 		},
 		{
+			"[1, 2, 3][-0]",
+			1,
+		},
+		{
+			"[1, 2, 3][-2]",
+			2,
+		},
+		{
+			"[1, 2, 3][-3]",
+			1,
+		},
+		{
 			"let myArray = [1, 2, 3]; myArray[2];",
 			3,
 		},
@@ -500,11 +516,11 @@ func TestArrayIndexExpressions(t *testing.T) {
 		},
 		{
 			"[1, 2, 3][3]",
-			"array index out of bounds: given index 3, array length is: 2",
+			"array index out of bounds: given index 3, array length is: 3",
 		},
 		{
-			"[1, 2, 3][-1]",
-			"array index out of bounds: given index -1, array length is: 2",
+			"[1, 2, 3][-4]",
+			"array index out of bounds: given index -4, array length is: 3",
 		},
 	}
 
