@@ -2,6 +2,7 @@ package evaluator
 
 import (
 	"fmt"
+	"math"
 	"seville/ast"
 	"seville/object"
 	"unicode/utf8"
@@ -206,6 +207,8 @@ func evalIntegerInfixExpression(operator string, left, right object.Object) obje
 		return &object.Integer{Value: leftVal * rightVal}
 	case "/":
 		return &object.Integer{Value: leftVal / rightVal}
+	case "**":
+		return &object.Integer{Value: int64(math.Pow(float64(leftVal), float64(rightVal)))}
 	case "<":
 		return nativeBoolToBooleanObject(leftVal < rightVal)
 	case ">":
