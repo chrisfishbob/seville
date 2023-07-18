@@ -906,10 +906,10 @@ func TestParsingIndexExpressions(t *testing.T) {
 	}
 
 	if !testIdentifier(t, indexExp.Left, "my_array") {
-		return 
+		return
 	}
 
 	if !testInfixExpression(t, indexExp.Index, 1, "+", 1) {
-		return 
+		return
 	}
 }
