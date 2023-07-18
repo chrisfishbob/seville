@@ -34,6 +34,7 @@ func TestNextToken(t *testing.T) {
 	1 + 1 == 2
 	1 <= 2
 	2 >= 12
+	5 + 5 ** 12
 	"foobar"
 	"foo if bar"
 	[1, "2"];
@@ -146,6 +147,11 @@ func TestNextToken(t *testing.T) {
 		{token.INT, "2"},
 		{token.INT, "2"},
 		{token.GT_OR_EQ, ">="},
+		{token.INT, "12"},
+		{token.INT, "5"},
+		{token.PLUS, "+"},
+		{token.INT, "5"},
+		{token.EXP, "**"},
 		{token.INT, "12"},
 		{token.STRING, "foobar"},
 		{token.STRING, "foo if bar"},

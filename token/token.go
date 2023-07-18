@@ -29,6 +29,7 @@ const (
 	GT_OR_EQ = ">="
 	EQ       = "=="
 	NOT_EQ   = "!="
+	EXP      = "**"
 
 	// Delimiters
 	COMMA     = ","

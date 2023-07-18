@@ -2,6 +2,7 @@ package evaluator
 
 import (
 	"fmt"
+	"math"
 	"seville/ast"
 	"seville/object"
 	"unicode/utf8"
@@ -13,7 +14,7 @@ var (
 	NULL  = &object.Null{}
 )
 
-var builtins = map[string]*object.Builtin {
+var builtins = map[string]*object.Builtin{
 	"len": {
 		Fn: func(args ...object.Object) object.Object {
 			if len(args) != 1 {
@@ -206,6 +207,8 @@ func evalIntegerInfixExpression(operator string, left, right object.Object) obje
 		return &object.Integer{Value: leftVal * rightVal}
 	case "/":
 		return &object.Integer{Value: leftVal / rightVal}
+	case "**":
+		return &object.Integer{Value: int64(math.Pow(float64(leftVal), float64(rightVal)))}
 	case "<":
 		return nativeBoolToBooleanObject(leftVal < rightVal)
 	case ">":
@@ -298,7 +301,7 @@ func evalIdentifier(node *ast.Identifier, env *object.Environment) object.Object
 		return val
 	}
 	if builtin, ok := builtins[node.Value]; ok {
-		return builtin 
+		return builtin
 	}
 
 	return newError("identifier not found: " + node.Value)
@@ -375,7 +378,7 @@ func evalArrayIndexExpression(array, index object.Object) object.Object {
 	}
 
 	if adjIdx > maxIdx || adjIdx < 0 {
-		return newError("array index out of bounds: given index %d, array length is: %d", rawIdx, maxIdx + 1) 
+		return newError("array index out of bounds: given index %d, array length is: %d", rawIdx, maxIdx+1)
 	}
 
 	return arrayObject.Elements[adjIdx]
