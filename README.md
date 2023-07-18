@@ -72,6 +72,7 @@ Now evaluating ...
 :white_check_mark: Recursion (`0, 0, 1, 1, 2, 3, 5, 8, ...`)  
 :white_check_mark: Strings (`"Hello, World!"`)  
 :white_check_mark: String concatendation (`"Hello" + " " + "World!"`)  
+:white_check_mark: Array literals (`[1, "hello", fn(n) {n * 2}]`)  
   
 ### Byte Code Compiler && Virtual Machine
 Coming soon!
