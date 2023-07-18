@@ -357,6 +357,7 @@ func evalIndexExpression(left, index object.Object) object.Object {
 	case left.Type() == object.ARRAY_OBJ && index.Type() == object.INTEGER_OBJ:
 		return evalArrayIndexExpression(left, index)
 	default:
+		// TODO: Imporve the error message here with invalid index type
 		return newError("index operator not supported: %s", left.Type())
 	}
 }

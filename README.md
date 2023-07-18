@@ -10,6 +10,7 @@ Here is a toy program that capsulates most of Seville's currently supported feat
 ```
 let 🍇 = 0
 let y = 23
+let nums = [1, 3 + 4, 2 * 2]
 let newAdder = fn(x) { 
     fn (y) {
         x + y
@@ -24,7 +25,7 @@ let fib = fn(n) {
 }
 
 let name = "Sev" + "ille"
-fib(addTen(🍇) - len(name) + 7)       # Outputs 55
+fib(addTen(🍇) - len(name) + arr[1])       # Outputs 55
 ```
 
 
@@ -73,6 +74,7 @@ Now evaluating ...
 :white_check_mark: Strings (`"Hello, World!"`)  
 :white_check_mark: String concatendation (`"Hello" + " " + "World!"`)  
 :white_check_mark: Array literals (`[1, "hello", fn(n) {n * 2}]`)  
+:white_check_mark: Array indices (`arr[1], arr[2 * 2]`)  
   
 ### Byte Code Compiler && Virtual Machine
 Coming soon!
