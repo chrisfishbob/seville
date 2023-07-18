@@ -25,7 +25,7 @@ let fib = fn(n) {
 }
 
 let name = "Sev" + "ille"
-fib(addTen(🍇) - len(name) + arr[1])       # Outputs 55
+fib(addTen(🍇) - len(name) + arr[-2])       # Outputs 55
 ```
 
 
@@ -75,6 +75,7 @@ Now evaluating ...
 :white_check_mark: String concatendation (`"Hello" + " " + "World!"`)  
 :white_check_mark: Array literals (`[1, "hello", fn(n) {n * 2}]`)  
 :white_check_mark: Array indices (`arr[1], arr[2 * 2]`)  
+:white_check_mark: Negative array indices(`let arr = [1, 2, 3]; arr[-1] == 3`)  
   
 ### Byte Code Compiler && Virtual Machine
 Coming soon!
