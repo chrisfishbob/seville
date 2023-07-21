@@ -24,8 +24,10 @@ let fib = fn(n) {
     fib(n - 1) + fib(n - 2)
 }
 
-let name = "Sev" + "ille"
-fib(addTen(🍇) - len(name) + arr[-2])       # Outputs 55
+let hashmap = {1: "ille"}
+let name = "Sev" + map[1] 
+let result = fib(addTen(🍇) - len(name) + arr[-2])       
+print(result)                                          # Outputs 55
 ```
 
 
@@ -39,7 +41,9 @@ fib(addTen(🍇) - len(name) + arr[-2])       # Outputs 55
 :white_check_mark: Multi-character operators  
 :white_check_mark: Unicode / emoji support 🌹  
 :white_check_mark: Array literals  
-:white_check_mark: Array indices
+:white_check_mark: Array indices  
+:white_check_mark: Hashmap literals  
+:white_check_mark: Hashmap indices
 
 ### Parser
 In progress, here are the completed ones ...  
@@ -57,6 +61,8 @@ In progress, here are the completed ones ...
 :white_check_mark: String concatendation (`"Hello" + " " + "World!"`)  
 :white_check_mark: Array literals (`[1, "hello" + "world", fn(x) {x * 2}]`)  
 :white_check_mark: Array indices (`arr[1 * 2]`)  
+:white_check_mark: Hashmap literals (`{"chris": "aws", "tim": "apple", "satya": "microsoft"}`)  
+:white_check_mark: Hashmap indices (`map["chris"]`)  
   
 ### Interpreter
 Now evaluating ...  
@@ -76,6 +82,8 @@ Now evaluating ...
 :white_check_mark: Array literals (`[1, "hello", fn(n) {n * 2}]`)  
 :white_check_mark: Array indices (`arr[1], arr[2 * 2]`)  
 :white_check_mark: Negative array indices(`let arr = [1, 2, 3]; arr[-1] == 3`)  
+:white_check_mark: Hashmap literals (`{"chris": "aws", "tim": "apple", "satya": "microsoft"}`)  
+:white_check_mark: Hashmap indices (`map["chris"]`)  
   
 ### Byte Code Compiler && Virtual Machine
 Coming soon!
