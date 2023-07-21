@@ -232,6 +232,7 @@ func TestErrorHandling(t *testing.T) {
 		},
 		{"foobar;", "identifier not found: foobar"},
 		{`"Hello" - "World"`, "unknown operator: STRING - STRING"},
+		{`{"name": "Monkey"}[fn (n) {n + 2}]`, "unusable as hash key: FUNCTION"},
 	}
 
 	for _, tt := range tests {
@@ -587,5 +588,57 @@ func TestHashLiterals(t *testing.T) {
 		}
 
 		testIntegerObject(t, pair.Value, expectedValue)
+	}
+}
+
+func TestHashIndexExpression(t *testing.T) {
+	tests := []struct {
+		input    string
+		expected interface{}
+	}{
+		{
+			`{"foo": 23}["foo"]`,
+			23,
+		},
+		{
+			`{"foo": 5}["bar"]`,
+			"key bar not found in hash map",
+		},
+		{
+			`let key = "foo"; {"foo": 5}[key]`,
+			5,
+		},
+		{
+			`{}["foo"]`,
+			"key foo not found in hash map",
+		},
+		{
+			`{5:5}[5]`,
+			5,
+		},
+		{
+			`{true:5}[true]`,
+			5,
+		},
+		{
+			`{false:5}[false]`,
+			5,
+		},
+	}
+	for _, tt := range tests {
+		evaluated := testEval(tt.input)
+		switch expected := tt.expected.(type) {
+		case int:
+			testIntegerObject(t, evaluated, int64(expected))
+		case string:
+			errObj, ok := evaluated.(*object.Error)
+			if !ok {
+				t.Fatalf("object is not Error. got=%T (%+v)", evaluated, evaluated)
+				continue
+			}
+			if errObj.Message != expected {
+				t.Errorf("wrong error message. expected=%q. got=%q", expected, errObj.Message)
+			}
+		}
 	}
 }
