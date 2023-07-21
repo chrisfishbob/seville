@@ -162,6 +162,10 @@ type Hash struct {
 	Pairs map[HashKey]HashPair
 }
 
+type Hashable interface {
+	HashKey() HashKey
+}
+
 func (h *Hash) Type() ObjectType { return HASH_OBJ }
 
 func (h *Hash) Inspect() string {
