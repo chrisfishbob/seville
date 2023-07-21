@@ -51,6 +51,15 @@ var builtins = map[string]*object.Builtin{
 			return &object.Array{Elements: newElements}
 		},
 	},
+	"print": {
+		Fn: func(args ...object.Object) object.Object {
+			for _, arg := range args {
+				fmt.Println(arg.Inspect())
+			}
+
+			return NULL
+		},
+	},
 }
 
 func Eval(node ast.Node, env *object.Environment) object.Object {
