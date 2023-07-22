@@ -93,6 +93,10 @@ func TestEvalBooleanExpression(t *testing.T) {
 		{`"hi" == "hi" in [1, false]`, false},
 		{"1 in [fn(n) {1}, 3]", false},
 		{"1 in [1, 2]", true},
+		{`"1" in {"1": 2}`, true},
+		{`1 in {"1": 2}`, false},
+		{`2 in {"1": 2}`, false},
+		{`"on" + "e" in {"one": 2}`, true},
 	}
 
 	for _, tt := range tests {
