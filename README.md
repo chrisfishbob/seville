@@ -5,29 +5,27 @@
 A C-family compiled language in pure Go, no libraries, no parser generators, no nothing!
 
 
-## Quick Tour
-Here is a toy program that capsulates most of Seville's currently supported features:  
+## Hello World!
+Here is a toy program that encapsulates most of seville's functionality.
 ```
-let 🍇 = 0
-let y = 23
-let nums = [1, 3 + 4, 2 * 2]
-let newAdder = fn(x) { 
-    fn (y) {
-        x + y
-    }
-}
-let addTen = newAdder(10)
+let 🍇 = 8
+let arr = [1, 2]
+let arr_2 = push(arr, 🍇)
 let fib = fn(n) {
     if (n <= 1) {
         return n
-    } 
-    fib(n - 1) + fib(n - 2)
+    }
+    return fib(n - 1) + fib(n - 2)
+}
+let hashmap = {"six": fib(6), "foo": "bar"}
+
+if (4 + 4 in arr_2) {
+    print("Hello")
 }
 
-let hashmap = {1: "ille"}
-let name = "Sev" + map[1] 
-let result = fib(addTen(🍇) - len(name) + arr[-2])       
-print(result)                                          # Outputs 55
+if (hashmap["s" + "i" + "x"] == arr_2[-1]) {
+    print("World!")
+} 
 ```
 
 
@@ -43,7 +41,8 @@ print(result)                                          # Outputs 55
 :white_check_mark: Array literals  
 :white_check_mark: Array indices  
 :white_check_mark: Hashmap literals  
-:white_check_mark: Hashmap indices
+:white_check_mark: Hashmap indices  
+:white_check_mark: In keyword
 
 ### Parser
 In progress, here are the completed ones ...  
@@ -61,9 +60,10 @@ In progress, here are the completed ones ...
 :white_check_mark: String concatendation (`"Hello" + " " + "World!"`)  
 :white_check_mark: Array literals (`[1, "hello" + "world", fn(x) {x * 2}]`)  
 :white_check_mark: Array indices (`arr[1 * 2]`)  
-:white_check_mark: Hashmap literals (`{"chris": "aws", "tim": "apple", "satya": "microsoft"}`)  
-:white_check_mark: Hashmap indices (`map["chris"]`)  
-  
+:white_check_mark: Hashmap literals (`{"chris": "aws", "tim": "apple", "satya": "microsoft"}`)   
+:white_check_mark: Hashmap indices (`map["chris"]`)   
+:white_check_mark: In keyword (`1 in ["hello", 1, false]`)  
+
 ### Interpreter
 Now evaluating ...  
 :white_check_mark: Integer literals (`1, 55`)  
@@ -84,6 +84,7 @@ Now evaluating ...
 :white_check_mark: Negative array indices(`let arr = [1, 2, 3]; arr[-1] == 3`)  
 :white_check_mark: Hashmap literals (`{"chris": "aws", "tim": "apple", "satya": "microsoft"}`)  
 :white_check_mark: Hashmap indices (`map["chris"]`)  
+:white_check_mark: In keyword (`1 in ["hello", 1, false]`)  
   
 ### Byte Code Compiler && Virtual Machine
 Coming soon!
