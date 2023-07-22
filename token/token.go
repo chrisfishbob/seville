@@ -30,6 +30,7 @@ const (
 	EQ       = "=="
 	NOT_EQ   = "!="
 	EXP      = "**"
+	IN       = "in"
 
 	// Delimiters
 	COMMA     = ","
@@ -62,6 +63,7 @@ var keywords = map[string]TokenType{
 	"else":   ELSE,
 	"elif":   ELIF,
 	"return": RETURN,
+	"in":     IN,
 }
 
 func LookupIdent(ident string) TokenType {

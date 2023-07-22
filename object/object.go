@@ -26,6 +26,7 @@ const (
 type Object interface {
 	Type() ObjectType
 	Inspect() string
+	Equals(other Object) bool
 }
 
 type Integer struct {
@@ -36,18 +37,27 @@ type BuiltinFunction func(args ...Object) Object
 
 func (i *Integer) Inspect() string  { return fmt.Sprintf("%d", i.Value) }
 func (i *Integer) Type() ObjectType { return INTEGER_OBJ }
+func (i *Integer) Equals(other Object) bool {
+	otherInt, ok := other.(*Integer)
+	if !ok {
+		return false
+	}
+	return i.Value == otherInt.Value
+}
 
 type Boolean struct {
 	Value bool
 }
 
-func (b *Boolean) Inspect() string  { return fmt.Sprintf("%t", b.Value) }
-func (b *Boolean) Type() ObjectType { return BOOLEAN_OBJ }
+func (b *Boolean) Inspect() string          { return fmt.Sprintf("%t", b.Value) }
+func (b *Boolean) Type() ObjectType         { return BOOLEAN_OBJ }
+func (b *Boolean) Equals(other Object) bool { return b == other }
 
 type Null struct{}
 
-func (n *Null) Inspect() string  { return "null" }
-func (n *Null) Type() ObjectType { return NULL_OBJ }
+func (n *Null) Inspect() string          { return "null" }
+func (n *Null) Type() ObjectType         { return NULL_OBJ }
+func (n *Null) Equals(other Object) bool { return n == other }
 
 type ReturnValue struct {
 	Value Object
@@ -55,6 +65,10 @@ type ReturnValue struct {
 
 func (rv *ReturnValue) Type() ObjectType { return RETURN_VALUE_OBJ }
 func (rv *ReturnValue) Inspect() string  { return rv.Value.Inspect() }
+func (rv *ReturnValue) Equals(other Object) bool {
+	// Return values are first unwrapped, this shouldn't be called, only for interface
+	return rv == other
+}
 
 type Error struct {
 	Message string
@@ -62,6 +76,13 @@ type Error struct {
 
 func (e *Error) Type() ObjectType { return ERROR_OBJ }
 func (e *Error) Inspect() string  { return "ERROR: " + e.Message }
+func (e *Error) Equals(other Object) bool {
+	otherErr, ok := other.(*Error)
+	if !ok {
+		return false
+	}
+	return e.Message == otherErr.Message
+}
 
 type Function struct {
 	Parameters []*ast.Identifier
@@ -88,6 +109,7 @@ func (f *Function) Inspect() string {
 
 	return out.String()
 }
+func (f *Function) Equals(other Object) bool { return f == other }
 
 type String struct {
 	Value string
@@ -95,6 +117,13 @@ type String struct {
 
 func (s *String) Type() ObjectType { return STRING_OBJ }
 func (s *String) Inspect() string  { return s.Value }
+func (s *String) Equals(other Object) bool {
+	otherStr, ok := other.(*String)
+	if !ok {
+		return false
+	}
+	return s.Value == otherStr.Value
+}
 
 type Builtin struct {
 	Fn BuiltinFunction
@@ -102,6 +131,9 @@ type Builtin struct {
 
 func (b *Builtin) Type() ObjectType { return BUILTIN_OBJ }
 func (b *Builtin) Inspect() string  { return "builtin function" }
+func (b *Builtin) Equals(other Object) bool {
+	return b == other
+}
 
 type Array struct {
 	Elements []Object
@@ -121,6 +153,9 @@ func (a *Array) Inspect() string {
 	out.WriteString("]")
 
 	return out.String()
+}
+func (a *Array) Equals(other Object) bool {
+	return a == other
 }
 
 type HashKey struct {
@@ -182,3 +217,5 @@ func (h *Hash) Inspect() string {
 
 	return out.String()
 }
+
+func (h *Hash) Equals(other Object) bool { return h == other }
