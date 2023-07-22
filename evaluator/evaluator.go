@@ -229,8 +229,15 @@ func evalInfixExpression(operator string, left, right object.Object) object.Obje
 				}
 			}
 			return FALSE
+		case *object.Hash:
+			key, ok := left.(object.Hashable)
+			if !ok {
+				return newError("unusable as hash key: %s", left.Type())
+			}
+			_, ok = iter.Pairs[key.HashKey()]
+			return nativeBoolToBooleanObject(ok)
 		default:
-			return FALSE
+			return newError("The `in` keyword is not supported for type %s", right.Type())
 		}
 	case left.Type() != right.Type():
 		return newError("type mismatch: %s %s %s", left.Type(), operator, right.Type())
