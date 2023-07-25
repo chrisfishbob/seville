@@ -17,7 +17,8 @@ let fib = fn(n) {
     }
     return fib(n - 1) + fib(n - 2)
 }
-let hashmap = {"six": fib(6), "foo": "bar"}
+let hashmap = {"foo": "bar"}
+hashmap["six"] = fib(6)
 
 if (4 + 4 in arr_2) {
     print("Hello")
@@ -63,6 +64,8 @@ In progress, here are the completed ones ...
 :white_check_mark: Hashmap literals (`{"chris": "aws", "tim": "apple", "satya": "microsoft"}`)   
 :white_check_mark: Hashmap indices (`map["chris"]`)   
 :white_check_mark: In keyword (`1 in ["hello", 1, false]`)  
+:white_check_mark: Identifier Assignment Expressions (`x = 5`)  
+:white_check_mark: Index Assignment Expressions (`arr[5] = 10`)  
 
 ### Interpreter
 Now evaluating ...  
@@ -85,7 +88,11 @@ Now evaluating ...
 :white_check_mark: Hashmap literals (`{"chris": "aws", "tim": "apple", "satya": "microsoft"}`)  
 :white_check_mark: Hashmap indices (`map["chris"]`)  
 :white_check_mark: In keyword (`1 in ["hello", 1, false]`)  
+:white_check_mark: Identifier Assignment Expressions (`x = 5`)  
+:white_check_mark: Array Index Assignment Expressions (`arr[5] = 10`)  
+:white_check_mark: Hashmap Index Assignment Expressions (`name_to_id["chris"] = 24601`)  
   
+
 ### Byte Code Compiler && Virtual Machine
 Coming soon!
 ## Related Projects
