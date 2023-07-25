@@ -976,3 +976,85 @@ func TestParsingEmptyHashLiteral(t *testing.T) {
 		t.Errorf("hash.Pairs has wrong length. got=%d", len(hash.Pairs))
 	}
 }
+
+func TestParsingIdentVariableReassignment(t *testing.T) {
+	input := `x = 2 * 3`
+	l := lexer.New(input)
+	p := New(l)
+	program := p.ParseProgram()
+	checkParserErrors(t, p)
+	stmt := program.Statements[0].(*ast.ExpressionStatement)
+
+	assignExp, ok := stmt.Expression.(*ast.AssignmentExpression)
+	if !ok {
+		t.Fatalf("exp is not *ast.AssignmentExpression. got=%T", stmt.Expression)
+	}
+
+	leftExp, ok := assignExp.Left.(*ast.Identifier)
+	if !ok {
+		t.Fatalf("exp is not *ast.IdentifierExpression. got=%T", stmt.Expression)
+	}
+	if leftExp.Value != "x" {
+		t.Errorf("expected %s, got %s", "x", assignExp.Left.String())
+	}
+
+	if assignExp.AssignmentType.Literal != "=" {
+		t.Errorf("expected %s, got %s", "x", assignExp.Left.String())
+	}
+
+	rightExp, ok := assignExp.Right.(*ast.InfixExpression)
+	if !ok {
+		t.Fatalf("exp is not *ast.InfixExpression. got=%T", assignExp.Right)
+	}
+
+	if !testInfixExpression(t, rightExp, 2, "*", 3) {
+		return
+	}
+}
+
+func TestParsingIndexVariableReassignment(t *testing.T) {
+	input := `arr[5] = 2 * 3`
+	l := lexer.New(input)
+	p := New(l)
+	program := p.ParseProgram()
+	checkParserErrors(t, p)
+	stmt := program.Statements[0].(*ast.ExpressionStatement)
+
+	assignExp, ok := stmt.Expression.(*ast.AssignmentExpression)
+	if !ok {
+		t.Fatalf("exp is not *ast.AssignmentExpression. got=%T", stmt.Expression)
+	}
+
+	// arr[5]
+	indexExp, ok := assignExp.Left.(*ast.IndexExpression)
+	if !ok {
+		t.Fatalf("exp is not *ast.IndexExpression. got=%T", assignExp.Left)
+	}
+
+	arrIdent, ok := indexExp.Left.(*ast.Identifier)
+	if !ok {
+		t.Fatalf("exp is not *ast.IndexExpression. got=%T", indexExp.Left)
+	}
+	if arrIdent.Value != "arr" {
+		t.Errorf("expected %s, got %s", "arr", arrIdent.Value)
+	}
+
+	if !testIntegerLiteral(t, indexExp.Index, 5) {
+		return
+	}
+
+	// =
+	if assignExp.AssignmentType.Literal != "=" {
+		t.Errorf("expected %s, got %s", "x", assignExp.Left.String())
+	}
+
+	// 2 * 3
+	rightExp, ok := assignExp.Right.(*ast.InfixExpression)
+	if !ok {
+		t.Fatalf("exp is not *ast.InfixExpression. got=%T", assignExp.Right)
+	}
+
+	if !testInfixExpression(t, rightExp, 2, "*", 3) {
+		return
+	}
+}
