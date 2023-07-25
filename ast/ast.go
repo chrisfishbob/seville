@@ -364,3 +364,24 @@ func (hl *HashLiteral) String() string {
 
 	return out.String()
 }
+
+type AssignmentExpression struct {
+	Token          token.Token // the '=' token
+	Left           Expression
+	AssignmentType token.Token
+	Right          Expression
+}
+
+func (ae *AssignmentExpression) expressionNode()      {}
+func (ae *AssignmentExpression) TokenLiteral() string { return ae.Token.Literal }
+func (ae *AssignmentExpression) String() string {
+	var out bytes.Buffer
+
+	out.WriteString(ae.Left.String())
+	out.WriteString(" ")
+	out.WriteString(ae.AssignmentType.Literal)
+	out.WriteString(" ")
+	out.WriteString(ae.Right.String())
+
+	return out.String()
+}

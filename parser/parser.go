@@ -11,6 +11,7 @@ import (
 const (
 	_ int = iota // using iota here to give constants incrementing numbers
 	LOWEST
+	ASSIGN      // =
 	IN          // in
 	EQUALS      // ==
 	LESSGREATER // >, <, >=, or <=
@@ -37,6 +38,7 @@ var precedences = map[token.TokenType]int{
 	token.LPAREN:   CALL,
 	token.LBRACKET: INDEX,
 	token.IN:       IN,
+	token.ASSIGN:   ASSIGN,
 }
 
 type (
@@ -91,6 +93,7 @@ func New(l *lexer.Lexer) *Parser {
 	p.registerInfix(token.LPAREN, p.parseCallExpressions)
 	p.registerInfix(token.LBRACKET, p.parseIndexExpression)
 	p.registerInfix(token.IN, p.parseInfixExpression)
+	p.registerInfix(token.ASSIGN, p.parseAssignmentExpression)
 
 	return p
 }
@@ -524,4 +527,17 @@ func (p *Parser) parseHashLiteral() ast.Expression {
 	}
 
 	return hash
+}
+
+func (p *Parser) parseAssignmentExpression(left ast.Expression) ast.Expression {
+	expression := &ast.AssignmentExpression{
+		Token:          p.curToken,
+		AssignmentType: p.curToken,
+		Left:           left,
+	}
+	precedence := p.curPrecedence()
+	p.nextToken()
+	expression.Right = p.parseExpression(precedence)
+
+	return expression
 }

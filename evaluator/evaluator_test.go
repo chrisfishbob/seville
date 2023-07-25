@@ -653,3 +653,47 @@ func TestHashIndexExpression(t *testing.T) {
 		}
 	}
 }
+
+func TestAssignmentExpression(t *testing.T) {
+	tests := []struct {
+		input    string
+		expected interface{}
+	}{
+		{"x = 2", 2},
+		{"x = 2 * 2", 4},
+		{"let x = 2; x = 3", 3},
+		{"let x = 2; x = 3; x", 3},
+		{"let x = 100; let foo = fn(x) {x = 2}; foo(5)", 2},
+		{"let x = 100; let foo = fn(x) {x = 2}; foo(5); x", 100},
+		{"let arr = [1, 2, 3]; arr[0] = 5", 5},
+		{"let arr = [1, 2, 3]; arr[0] = 5; arr[0]", 5},
+		{"let arr = []; arr[0] = 1", "Array index out of bounds: given index 0, array length is 0"},
+		{"let arr = []; arr[2 * 2] = 1", "Array index out of bounds: given index 4, array length is 0"},
+		{`let name_to_age = {}; name_to_age["Charlie"] = 99`, 99},
+		{`let name_to_age = {}; name_to_age["Charlie"] = 99; name_to_age["Charlie"]`, 99},
+		{`let foo = {"one": 1}; foo["two"] = 7 * 7 -47`, 2},
+		{`let foo = {"one": 1}; foo["two"] = 7 * 7 -47; foo["two"]`, 2},
+		{`let foo = {"one": 1}; foo["two"] = 7 * 7 -47; foo["one"]`, 1},
+		{
+			`let foo = {}; foo[fn(n) {n ** 2}] = 1`,
+			"Hashmap index must be a hashable type, got type *object.Function",
+		},
+	}
+
+	for _, tt := range tests {
+		evaluated := testEval(tt.input)
+		switch expected := tt.expected.(type) {
+		case int:
+			testIntegerObject(t, evaluated, int64(expected))
+		case string:
+			errObj, ok := evaluated.(*object.Error)
+			if !ok {
+				t.Fatalf("object is not Error. got=%T (%+v)", evaluated, evaluated)
+				continue
+			}
+			if errObj.Message != expected {
+				t.Errorf("wrong error message. expected=%q. got=%q", expected, errObj.Message)
+			}
+		}
+	}
+}

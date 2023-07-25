@@ -148,6 +148,8 @@ func Eval(node ast.Node, env *object.Environment) object.Object {
 		return evalIndexExpression(left, index)
 	case *ast.HashLiteral:
 		return evalHashLiteral(node, env)
+	case *ast.AssignmentExpression:
+		return evalAssignmentExpression(node, env)
 	}
 
 	return nil
@@ -478,4 +480,63 @@ func evalHashIndexExpression(hash, index object.Object) object.Object {
 	}
 
 	return pair.Value
+}
+
+func evalAssignmentExpression(node *ast.AssignmentExpression, env *object.Environment) object.Object {
+	switch left := node.Left.(type) {
+	case *ast.Identifier:
+		rightVal := Eval(node.Right, env)
+		env.Set(left.Value, rightVal)
+		return rightVal
+	case *ast.IndexExpression:
+		collection := Eval(left.Left, env)
+		if isError(collection) {
+			return collection
+		}
+
+		rightVal := Eval(node.Right, env)
+		if isError(rightVal) {
+			return rightVal
+		}
+
+		index := Eval(left.Index, env)
+		if isError(index) {
+			return index
+		}
+
+		return assignCollectionElementValue(collection, index, rightVal)
+	default:
+		return newError("Invalid assignment: left is of type %T", left)
+	}
+}
+
+func assignCollectionElementValue(collection object.Object, index object.Object, value object.Object) object.Object {
+	switch collection := collection.(type) {
+	case *object.Array:
+		index, ok := index.(*object.Integer)
+		if !ok {
+			return newError("Array indices must be integers. got=%T", index)
+		}
+
+		arrayLength := int64(len(collection.Elements))
+		if index.Value >= arrayLength {
+			return newError("Array index out of bounds: given index %d, array length is %d", index.Value, arrayLength)
+		}
+
+		collection.Elements[index.Value] = value
+		return value
+
+	case *object.Hash:
+		key, ok := index.(object.Hashable)
+		if !ok {
+			return newError("Hashmap index must be a hashable type, got type %T", index)
+		}
+
+		keyHash := key.HashKey()
+		collection.Pairs[keyHash] = object.HashPair{Key: index, Value: value}
+		return value
+
+	default:
+		return newError("cannot index type of %T", collection)
+	}
 }
