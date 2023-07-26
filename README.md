@@ -91,15 +91,45 @@ Now evaluating ...
 :white_check_mark: Identifier Assignment Expressions (`x = 5`)  
 :white_check_mark: Array Index Assignment Expressions (`arr[5] = 10`)  
 :white_check_mark: Hashmap Index Assignment Expressions (`name_to_id["chris"] = 24601`)  
-  
 
-### Byte Code Compiler && Virtual Machine
+
+
+## A Random Example:
+Seville can solve real problems, even without loops.   
+Here is an optimal O(n) solution to the Leetcode classic Two Sum question in 100% Seville
+```
+let two_sum = fn(nums, target) {
+    let helper = fn(index, seen_nums) {
+        let complement = target - nums[index]
+        if (complement in seen_nums) {
+            return [seen_nums[complement], index]
+        }
+
+        seen_nums[nums[index]] = index
+        return helper(index + 1, seen_nums)
+    }
+
+    return helper(0, {})
+}
+```
+
+## Byte Code Compiler && Virtual Machine
 Coming soon!
+
 ## Related Projects
 Seviile is not my first language, in fact, it's my third!
 Here are the others:  
 * JYSS- A lisp with a static type-checker, written in Typed Racket. (Closed-source for academic reasons.)  
 * [Spark](https://github.com/chrisfishbob/Spark)- Dynamically-typed lisp written in Python 3.10. (avaialble without install via API hosted on AWS)
+
+
+## FAQ
+Q: Why no loops?  
+
+A: Parsing loops is trivial, a mostly-complete `while` loop exists in a dev branch, but becuase
+   I am moving the language away from a tree-walking interpreter to be byte code compiled, I do
+   not want to waste the energy to implement them twice. Also, I haven't decided what they should
+   look like yet!
 
 
 ## Credits
