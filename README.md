@@ -30,6 +30,26 @@ if (hashmap["s" + "i" + "x"] == arr_2[-1]) {
 ```
 
 
+## Two Sum:
+Seville can solve real problems, even without loops (yet, coming real soon).   
+Here is an optimal O(n) solution to the Leetcode classic Two Sum question in 100% Seville
+```
+let two_sum = fn(nums, target) {
+    let helper = fn(index, seen_nums) {
+        let complement = target - nums[index]
+        if (complement in seen_nums) {
+            return [seen_nums[complement], index]
+        }
+
+        seen_nums[nums[index]] = index
+        return helper(index + 1, seen_nums)
+    }
+
+    return helper(0, {})
+}
+```
+
+
 ## Progress Landmarks
 ### Lexer
 :white_check_mark: Single-character operators  
@@ -94,25 +114,6 @@ Now evaluating ...
 
 
 
-## A Random Example:
-Seville can solve real problems, even without loops.   
-Here is an optimal O(n) solution to the Leetcode classic Two Sum question in 100% Seville
-```
-let two_sum = fn(nums, target) {
-    let helper = fn(index, seen_nums) {
-        let complement = target - nums[index]
-        if (complement in seen_nums) {
-            return [seen_nums[complement], index]
-        }
-
-        seen_nums[nums[index]] = index
-        return helper(index + 1, seen_nums)
-    }
-
-    return helper(0, {})
-}
-```
-
 ## Byte Code Compiler && Virtual Machine
 Coming soon!
 
@@ -131,6 +132,9 @@ A: Parsing loops is trivial, a mostly-complete `while` loop exists in a dev bran
    not want to waste the energy to implement them twice. Also, I haven't decided what they should
    look like yet!
 
+Q: Why does this language exist?  
+
+A: Because writing languages is fun!  
 
 ## Credits
 * *Programming Languages: Application and Interpretation* by Shriram Krishnamurthi  
