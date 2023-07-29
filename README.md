@@ -49,6 +49,12 @@ let two_sum = fn(nums, target) {
 }
 ```
 
+## Installation
+Since Seville is 100% pure Go, running it is as simple as running any typical "Hello, World!" program
+in Go. Simply download the code and run:
+```
+go run seville
+```
 
 ## Progress Landmarks
 ### Lexer
@@ -114,8 +120,9 @@ Now evaluating ...
 
 
 
-## Byte Code Compiler && Virtual Machine
-Coming soon!
+## Byte Code Compiler && Virtual Machine: In progress!
+### Opcode
+:white_check_mark: `OpConstant` represents constant values that are known at compile-time  
 
 ## Related Projects
 Seviile is not my first language, in fact, it's my third!
