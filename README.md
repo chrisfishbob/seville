@@ -124,6 +124,9 @@ Now evaluating ...
 ### Opcode
 :white_check_mark: `OpConstant` represents constant values that are known at compile-time  
 
+### Compiler
+:white_check_mark: Integer constants  
+
 ## Related Projects
 Seviile is not my first language, in fact, it's my third!
 Here are the others:  
