@@ -24,6 +24,7 @@ func TestIntegerArithmetic(t *testing.T) {
 			expectedInstructions: []opcode.Instructions{
 				opcode.Make(opcode.OpConstant, 0),
 				opcode.Make(opcode.OpConstant, 1),
+				opcode.Make(opcode.OpAdd),
 			},
 		},
 	}

@@ -126,7 +126,8 @@ Now evaluating ...
 :white_check_mark: `OpAdd` tells the VM to pop two topmost elements off the stack, add them together, and push the result  
 
 ### Compiler
-:white_check_mark: Integer constants  
+:white_check_mark: `OpConstant`   
+:white_check_mark: `OpAdd`  
 
 
 ### Virtual Machine
