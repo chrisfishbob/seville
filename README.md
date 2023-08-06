@@ -62,7 +62,7 @@ You will then be greeted by the Seville REPL, which is how the languages interac
 >> print("Hello, World!")
 Hello, World!
 ```
-(Note that all statements in the REPL currently has to fit in one line while the REPL is in its infancy.)
+(*Note that each statement in the REPL currently has to fit in one line while the REPL is in its infancy*)
 
 Since there are two implementations of Seville, one with an interpreter, the other with a compiler and a virtual machine,
 you can toggle which implementation to use with the optional `--compiled` flag.
@@ -76,7 +76,7 @@ Executing using the experimental compiler ...
 ```
 
 The Seville compiler and virtual machine is a work in progress and is currently a subset of the
-full language, but the compiled bytecode executes around 200-300% faster than the interpreted version.
+full language, but the compiled bytecode executes around ***200-300%*** faster than the interpreted version.
 
 
 ## Progress Landmarks
