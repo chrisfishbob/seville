@@ -1,22 +1,16 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
-	"os/user"
 	"seville/repl"
 )
 
 func main() {
-	user, err := user.Current()
-	if err != nil {
-		panic(err)
-	}
+	compiled := flag.Bool("compiled", false, "use the seville compiler and virtual machine")
+	flag.Parse()
 
-	if len(os.Args) == 1 {
-		fmt.Printf("🍇 Hello %s! This is the Seville programming language! 🍇\n", user.Username)
-		repl.Start(os.Stdin, os.Stdout)
-	} else {
-		fmt.Fprintln(os.Stderr, "ERROR: Seville currently only supports REPL")
-	}
+	fmt.Printf("🍇 Seville v0.1.0-alpha 🍇\n")
+	repl.Start(os.Stdin, os.Stdout, *compiled)
 }

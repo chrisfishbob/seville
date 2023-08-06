@@ -44,7 +44,7 @@ func (vm *VM) Run() error {
 			left := vm.pop()
 			leftValue := left.(*object.Integer).Value
 			rightValue := right.(*object.Integer).Value
-			
+
 			vm.push(&object.Integer{Value: leftValue + rightValue})
 		}
 	}
@@ -65,7 +65,7 @@ func (vm *VM) push(obj object.Object) error {
 
 func (vm *VM) pop() object.Object {
 	obj := vm.stack[vm.sp-1]
-	vm.sp-- 
+	vm.sp--
 
 	return obj
 }

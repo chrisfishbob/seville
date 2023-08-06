@@ -49,12 +49,35 @@ let two_sum = fn(nums, target) {
 }
 ```
 
-## Installation
+## Running Seville 
 Since Seville is 100% pure Go, running it is as simple as running any typical "Hello, World!" program
 in Go. Simply download the code and run:
 ```
 go run seville
 ```
+
+You will then be greeted by the Seville REPL, which is how the languages interacts with the user currently
+```
+🍇 Seville v0.1.0-alpha 🍇  
+>> print("Hello, World!")
+Hello, World!
+```
+(Note that all statements in the REPL currently has to fit in one line while the REPL is in its infancy.)
+
+Since there are two implementations of Seville, one with an interpreter, the other with a compiler and a virtual machine,
+you can toggle which implementation to use with the optional `--compiled` flag.
+```
+❯ go run seville --compiled
+
+🍇 Seville v0.1.0-alpha 🍇
+Executing using the experimental compiler ...
+>> 10 + 50
+60
+```
+
+The Seville compiler and virtual machine is a work in progress and is currently a subset of the
+full language, but the compiled bytecode executes around 200-300% faster than the interpreted version.
+
 
 ## Progress Landmarks
 ### Lexer
