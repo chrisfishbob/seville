@@ -123,9 +123,15 @@ Now evaluating ...
 ## Byte Code Compiler && Virtual Machine: In progress!
 ### Opcode
 :white_check_mark: `OpConstant` represents constant values that are known at compile-time  
+:white_check_mark: `OpAdd` tells the VM to pop two topmost elements off the stack, add them together, and push the result  
 
 ### Compiler
 :white_check_mark: Integer constants  
+
+
+### Virtual Machine
+:white_check_mark: Constants
+
 
 ## Related Projects
 Seviile is not my first language, in fact, it's my third!
