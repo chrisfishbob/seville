@@ -47,6 +47,7 @@ func Start(in io.Reader, out io.Writer, isCompiled bool) {
 			output, err := executeProgramWithCompiler(program)
 			if err != nil {
 				io.WriteString(out, err.Error())
+				io.WriteString(out, "\n")
 				continue
 			}
 			io.WriteString(out, output)
