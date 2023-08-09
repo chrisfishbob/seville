@@ -27,6 +27,15 @@ func TestIntegerArithmetic(t *testing.T) {
 				opcode.Make(opcode.OpAdd),
 			},
 		},
+		{
+			input:             "1 - 2",
+			expectedConstants: []interface{}{1, 2},
+			expectedInstructions: []opcode.Instructions{
+				opcode.Make(opcode.OpConstant, 0),
+				opcode.Make(opcode.OpConstant, 1),
+				opcode.Make(opcode.OpSubtract),
+			},
+		},
 	}
 
 	runCompilerTests(t, tests)

@@ -46,6 +46,13 @@ func (vm *VM) Run() error {
 			rightValue := right.(*object.Integer).Value
 
 			vm.push(&object.Integer{Value: leftValue + rightValue})
+		case opcode.OpSubtract:
+			right := vm.pop()
+			left := vm.pop()
+			leftValue := left.(*object.Integer).Value
+			rightValue := right.(*object.Integer).Value
+
+			vm.push(&object.Integer{Value: leftValue - rightValue})
 		}
 	}
 

@@ -145,16 +145,20 @@ Now evaluating ...
 
 ## Byte Code Compiler && Virtual Machine: In progress!
 ### Opcode
-:white_check_mark: `OpConstant` represents constant values that are known at compile-time  
+:white_check_mark: `OpConstant` represents constant values that are known at compile-time   
 :white_check_mark: `OpAdd` tells the VM to pop two topmost elements off the stack, add them together, and push the result  
+:white_check_mark: `OpSubtract` tells the VM to pop two topmost elements off the stack, subtract them , and push the result  
 
 ### Compiler
 :white_check_mark: `OpConstant`   
 :white_check_mark: `OpAdd`  
+:white_check_mark: `OpSubtract`  
 
 
 ### Virtual Machine
-:white_check_mark: Constants
+:white_check_mark: Constants  
+:white_check_mark: Integer arithmetic: `+`  
+:white_check_mark: Integer arithmetic: `-`  
 
 
 ## Related Projects
