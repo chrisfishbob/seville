@@ -160,26 +160,6 @@ Now evaluating ...
 :white_check_mark: Integer arithmetic: `+`  
 :white_check_mark: Integer arithmetic: `-`  
 
-
-## Related Projects
-Seviile is not my first language, in fact, it's my third!
-Here are the others:  
-* JYSS- A lisp with a static type-checker, written in Typed Racket. (Closed-source for academic reasons.)  
-* [Spark](https://github.com/chrisfishbob/Spark)- Dynamically-typed lisp written in Python 3.10. (avaialble without install via API hosted on AWS)
-
-
-## FAQ
-Q: Why no loops?  
-
-A: Parsing loops is trivial, a mostly-complete `while` loop exists in a dev branch, but becuase
-   I am moving the language away from a tree-walking interpreter to be byte code compiled, I do
-   not want to waste the energy to implement them twice. Also, I haven't decided what they should
-   look like yet!
-
-Q: Why does this language exist?  
-
-A: Because writing languages is fun!  
-
 ## Credits
 * *Programming Languages: Application and Interpretation* by Shriram Krishnamurthi  
 * *Crafting Interpreters* by Rober Nystrom  
