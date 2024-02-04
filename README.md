@@ -2,7 +2,9 @@
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Go](https://github.com/chrisfishbob/seville/actions/workflows/go.yml/badge.svg)](https://github.com/chrisfishbob/seville/actions/workflows/go.yml)  
 
-A C-family bytecode-compiled language in pure Go, no libraries, no parser generators, no nothing!
+A C-family bytecode-compiled language in pure Go, no libraries, no parser generators, no nothing!d
+
+(Note: Still working on this, just been busy with school, work and the Chess engine!)
 
 
 ## Hello World!
