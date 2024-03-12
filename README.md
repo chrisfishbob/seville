@@ -5,6 +5,8 @@
 A C-family bytecode-compiled language in pure Go, no libraries, no parser generators, no nothing!
 
 (Note: Still working on this, just been busy with school, work, job searching, and the Chess engine!)
+(Note^2: There's a good amount of work in a local dev branch that's not here, because I need to fix a couple thing when I circle back)
+(Note^3): Does anyone actually read this? Hello? Hi mom!
 
 
 ## Hello World!
