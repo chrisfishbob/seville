@@ -4,7 +4,7 @@
 
 A C-family bytecode-compiled language in pure Go, no libraries, no parser generators, no nothing!
 
-(Note: Still working on this, just been busy with school, work and the Chess engine!)
+(Note: Still working on this, just been busy with school, work, job searching, and the Chess engine!)
 
 
 ## Hello World!
